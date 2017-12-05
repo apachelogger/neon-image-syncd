@@ -1,0 +1,8 @@
+[Unit]
+Description=Sync neon images
+
+[Service]
+Type=oneshot
+ExecStart=/home/neon-image-syncd/client.rb
+User=neon-image-sync
+Group=neon-image-sync

@@ -1,0 +1,11 @@
+[Unit]
+Description=neon image rsync daemon socket
+
+[Socket]
+ListenStream=/home/neon-image-syncd/service.sock
+SocketMode=0660
+SocketUser=neon-image-syncd
+SocketGroup=neon-image-sync
+
+[Install]
+WantedBy=sockets.target

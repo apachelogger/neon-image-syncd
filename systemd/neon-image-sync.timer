@@ -1,0 +1,6 @@
+[Unit]
+Description=Timer to sync neon images
+
+[Timer]
+OnCalendar=hourly
+Persistent=true
