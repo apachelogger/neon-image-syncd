@@ -6,3 +6,6 @@ ExecStart=/home/neon-image-syncd/bin/neon-image-syncd
 User=neon-image-syncd
 Group=neon-image-syncd
 Restart=always
+
+[Install]
+WantedBy=default.target
