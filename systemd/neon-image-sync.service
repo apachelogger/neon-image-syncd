@@ -3,6 +3,6 @@ Description=Sync neon images
 
 [Service]
 Type=oneshot
-ExecStart=/home/neon-image-syncd/client.rb
+ExecStart=/home/neon-image-syncd/sync
 User=neon-image-sync
 Group=neon-image-sync
