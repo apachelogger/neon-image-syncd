@@ -27,7 +27,6 @@ import (
 	"io"
 	"os"
 	"os/exec"
-	"os/user"
 	"sync"
 
 	"github.com/coreos/go-systemd/activation"
@@ -38,31 +37,6 @@ import (
 )
 
 var rsyncMutex sync.Mutex
-var chownUser, chownGroup = func() (string, string) {
-	wwwGroupName := "www-data"
-	u, err := user.Current()
-	if err != nil {
-		panic(err)
-	}
-	isMemberOfWWW := false
-	groupIds, err := u.GroupIds()
-	if err != nil {
-		panic(err)
-	}
-	for _, gid := range groupIds {
-		group, err := user.LookupGroupId(gid)
-		if err != nil {
-			continue
-		}
-		if group.Name == wwwGroupName {
-			isMemberOfWWW = true
-		}
-	}
-	if isMemberOfWWW {
-		return u.Username, wwwGroupName
-	}
-	panic("Current user is not member of " + wwwGroupName)
-}()
 
 // Event is a helper struct to queue up events for streaming.
 type Event struct {
@@ -127,7 +101,6 @@ func v1Sync(c *gin.Context) {
 	// cmd := exec.Command("ls", "-lah")
 	cmd := exec.Command("/usr/bin/rsync",
 		"-rlptv", "--info=progress", "--delete",
-		"--chown="+chownUser+":"+chownGroup,
 		"rsync://racnoss.kde.org/applicationdata/neon",
 		"/mnt/volume-do-cacher-storage/files.kde.org/")
 
