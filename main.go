@@ -101,7 +101,7 @@ func v1Sync(c *gin.Context) {
 	// cmd := exec.Command("ls", "-lah")
 	cmd := exec.Command("/usr/bin/rsync",
 		"-rlptv", "--info=progress", "--delete",
-		"rsync://racnoss.kde.org/applicationdata/neon",
+		"rsync://master.kde.org/applicationdata/neon",
 		"/mnt/volume-do-cacher-storage/files.kde.org/")
 
 	stdout, err := cmd.StdoutPipe()
